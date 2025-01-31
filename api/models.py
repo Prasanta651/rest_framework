@@ -4,7 +4,16 @@ from django.contrib.auth.models import AbstractUser
 from  django.db import models
 
 class User(AbstractUser):
-    pass
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_set',  # Change this to avoid conflict
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_permissions_set',  # Change this to avoid conflict
+        blank=True
+    )
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -47,7 +56,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField()
 
     @property
-    def item_subtotal(self)-> float:
+    def item_subtotal(self):
         return self.product.price * self.quantity
 
     def __str__(self):
