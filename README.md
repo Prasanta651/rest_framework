@@ -4,3 +4,5 @@ Rest_Framework A project designed to provide a simple, clean, and scalable API u
 # Configuring a Custom User Model
 To use a custom user model, update the AUTH_USER_MODEL setting to 'api.User' in your settings.py file.
 
+- Run "python manage.py makemigrations" to create migration files for your models.
+
