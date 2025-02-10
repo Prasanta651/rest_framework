@@ -30,6 +30,12 @@ class OrderSerializer(serializers.ModelSerializer):
     used in the model for the ForeignKey relationship.
     '''
     items = OrderItemSerializer(many=True, read_only=True)
+
+    '''
+    If we don't include the `items` property in the serializer, 
+    it will not automatically serialize the related `OrderItem` objects. 
+    Instead, only the primary key of the related `OrderItem` objects will be returned by default.
+    '''
     class Meta:
         model = Order
         fields = (
@@ -40,8 +46,8 @@ class OrderSerializer(serializers.ModelSerializer):
             'items'
             )
 
-# class ProductInfoSerializer(serializers.Serializer):
-#     products = ProductSerializer(many=True)
-#     count = serializers.ImageField()
-#     max_price = serializers.FloatField()
+class ProductInfoSerializer(serializers.Serializer):
+    products = ProductSerializer(many=True)
+    count = serializers.ImageField()
+    max_price = serializers.FloatField()
     
