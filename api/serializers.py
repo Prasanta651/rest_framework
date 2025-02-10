@@ -37,9 +37,9 @@ class OrderSerializer(serializers.ModelSerializer):
     Instead, only the primary key of the related `OrderItem` objects will be returned by default.
     '''
 
-    total_price = serializers.SerializerMethodField()
+    total_price = serializers.SerializerMethodField(method_name='total')
 
-    def get_total_price(self, obj):
+    def total(self, obj):
         order_items = obj.items.all()
         return sum(order_item.item_subtotal for order_item in order_items)
     class Meta:
