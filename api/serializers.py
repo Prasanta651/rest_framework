@@ -22,10 +22,17 @@ class ProductSerializer(serializers.ModelSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     # By default, the product field returns the primary key (pk) of the product.
     # To override this, we use the ProductSerializer to return detailed information about the product.
-    product = ProductSerializer()
+    # product = ProductSerializer()
+
+    '''
+    Instead of serializing all properties of the product, 
+    only pass specific properties (e.g., name and price) as shown below.
+    '''
+    product_name = serializers.CharField(source='product.name')
+    product_price = serializers.FloatField(source='product.price')
     class Meta:
         model = OrderItem
-        fields = ('product', 'quantity')
+        fields = ('product_name', 'product_price', 'quantity')
 
 class OrderSerializer(serializers.ModelSerializer):
     '''
