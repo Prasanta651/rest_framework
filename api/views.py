@@ -30,12 +30,13 @@ def order_list(request):
 
 @api_view(['GET'])
 def product_info(request):
-    products = Product.object.all()
+    products = Product.objects.all()
     serializer = ProductInfoSerializer(
         {
             'products':products,
             'count': len(products),
-            'max_price': products.aggreate(max_price=Max('price'))['max_price']
+            'max_price': products.aggregate(max_price=Max('price'))['max_price']
         }
     )
+    return Response(serializer.data)
 
