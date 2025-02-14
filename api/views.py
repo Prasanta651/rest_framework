@@ -7,6 +7,28 @@ from rest_framework.response import Response
 from api.models import Order, Product
 from api.serializers import OrderSerializer, ProductSerializer, ProductInfoSerializer
 
+from rest_framework import generics
+
+# class based views
+class ProductListAPIView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductDetailsAPIView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    # Override default parameter
+    lookup_url_kwarg = 'product_id' 
+
+
+class OrderListAPIView(generics.ListAPIView):
+    queryset = Order.objects.prefetch_related('items__product').all()
+    serializer_class = ProductSerializer
+
+
+
+#  function based views
 @api_view(['GET'])
 def product_list(request):
     products = Product.objects.all()
