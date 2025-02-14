@@ -21,6 +21,7 @@ from django.urls import path, include
 from api import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('_products/', views.ProductListAPIView.as_view()),
     # path('products/<int:pk>', views.ProductDetailsAPIView.as_view()),
     # ''' By default, the URL parameter is 'pk'. If it's changed, we need to specify the new name 
