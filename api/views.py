@@ -33,7 +33,6 @@ class UserOrderListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        print('testtest', self.request.user)
         return qs.filter(user=self.request.user)
 
 
