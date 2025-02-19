@@ -9,8 +9,10 @@ from api.models import Order, Product
 from api.serializers import OrderSerializer, ProductSerializer, ProductInfoSerializer
 
 from rest_framework import generics
+from rest_framework.views import APIView
 
-# class based views
+
+# class based generics views
 class ProductListAPIView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -36,6 +38,20 @@ class UserOrderListAPIView(generics.ListAPIView):
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(user=self.request.user)
+
+# class based api views
+class ProductInfoAPIView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductInfoSerializer(
+            {
+                'products':products,
+                'count': len(products),
+                'max_price': products.aggregate(max_price=Max('price'))['max_price']
+            }
+        )
+        return Response(serializer.data)
+
 
 
 #  function based views
