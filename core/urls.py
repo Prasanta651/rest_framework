@@ -28,7 +28,7 @@ urlpatterns = [
     #  in the 'lookup_url_kwarg' attribute within the class. '''
     path('_products/<int:product_id>', views.ProductDetailsAPIView.as_view()),
     path('_orders/', views.OrderListAPIView.as_view()),
-    path('user_orders/', views.UserOrderListAPIView.as_view()),
+    path('user_orders/', views.UserOrderListAPIView.as_view(), name='user_orders'),
 
     path('products/', views.product_list),
     path('products_info/', views.product_info),
