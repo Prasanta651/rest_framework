@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 
 
 # class based generics views
-class ProductListAPIView(generics.ListAPIView):
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 

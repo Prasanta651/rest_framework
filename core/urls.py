@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # urls for class generic view
-    path('_products/', views.ProductListAPIView.as_view()),
+    path('_products/', views.ProductListCreateAPIView.as_view()),
     # path('products/<int:pk>', views.ProductDetailsAPIView.as_view()),
     # ''' By default, the URL parameter is 'pk'. If it's changed, we need to specify the new name 
     #  in the 'lookup_url_kwarg' attribute within the class. '''
